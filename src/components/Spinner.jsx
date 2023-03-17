@@ -7,7 +7,7 @@ function Spinner() {
         width={100}
         src={dualball}
         alt="Loading..."
-        className="text-center mx-auto"
+        className="text-center mx-auto mt-16"
       />
     </div>
   );
