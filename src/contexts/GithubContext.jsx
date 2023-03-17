@@ -5,8 +5,9 @@ export const GithubContext = createContext();
 
 export function GithubProvider({ children }) {
   const initialState = {
-    users: [],
     loading: false,
+    users: [],
+    user: {},
   };
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
@@ -30,13 +31,29 @@ export function GithubProvider({ children }) {
     dispatch({ type: "CLEAR_USERS" });
   }
 
+  async function getUser(login) {
+    setLoading();
+
+    const response = await fetch(`https://api.github.com/users/${login}`);
+
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      const data = await response.json();
+
+      dispatch({ type: "GET_USER", payload: data });
+    }
+  }
+
   return (
     <GithubContext.Provider
       value={{
-        users: state.users,
         loading: state.loading,
+        users: state.users,
+        user: state.user,
         searchUsers,
         clearUsers,
+        getUser,
       }}
     >
       {children}

@@ -3,9 +3,11 @@ function GithubReducer(state, action) {
     case "SET_LOADING":
       return { ...state, loading: true };
     case "GET_USERS":
-      return { ...state, users: action.payload, loading: false };
+      return { ...state, loading: false, users: action.payload };
     case "CLEAR_USERS":
       return { ...state, users: [] };
+    case "GET_USER":
+      return { ...state, loading: false, user: action.payload };
     default:
       return state;
   }
