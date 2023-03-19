@@ -3,13 +3,15 @@ import { GithubContext } from "../contexts/GithubContext";
 import { useParams, Link } from "react-router-dom";
 import { FaCodepen, FaStore, FaUsers, FaUserFriends } from "react-icons/fa";
 import Spinner from "../components/Spinner";
+import RepoList from "../components/RepoList";
 
 function User() {
-  const { loading, user, getUser } = useContext(GithubContext);
+  const { loading, user, getUser, repos, getRepos } = useContext(GithubContext);
   const params = useParams();
 
   useEffect(() => {
     getUser(params.login);
+    getRepos(params.login);
   }, []);
 
   const {
@@ -53,10 +55,8 @@ function User() {
         <div className="col-span-2">
           <h1 className="text-3xl mb-6 card-title">
             {name}
-            <div className="ml-4 text-xs badge badge-success">{type}</div>
-            {hireable && (
-              <div className="text-xs badge badge-info">Hireable</div>
-            )}
+            <div className="ml-4 badge badge-success">{type}</div>
+            {hireable && <div className="badge badge-info">Hireable</div>}
           </h1>
           <p className="mb-6">{bio}</p>
           <a
@@ -78,7 +78,11 @@ function User() {
               <div className="stat">
                 <p className="stat-title text-md">Website</p>
                 <p className="stat-value text-lg">
-                  <a href={blog} target="_blank" rel="noreferrer">
+                  <a
+                    href={blog.startsWith("http") ? blog : `https://${blog}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {blog}
                   </a>
                 </p>
@@ -131,6 +135,7 @@ function User() {
           <p className="stat-value pr-6 text-2xl">{public_gists}</p>
         </div>
       </div>
+      <RepoList repos={repos} />
     </div>
   );
 }
