@@ -4,14 +4,14 @@ This is a web application built with React that allows users to search for GitHu
 
 ## Features
 
-Search for GitHub users using their username
-View the user's profile information including their bio, followers, following and their repositories
+Search for GitHub users using their username  
+View the user's profile information including their bio, followers, following and their repositories  
 Links to the user's public GitHub profile and each repository
 
 ## Technologies used
 
-React
-Tailwind
+React  
+Tailwind  
 GitHub REST API
 
 ## Usage
