@@ -20,4 +20,4 @@ To use this app, simply enter a GitHub username into the search bar and click "S
 
 ## Demo
 
-A live demo of this application is available at https://admirable-snickerdoodle-7e2542.netlify.app/
+A live demo of this application is available at https://github-finder-app-sohrabzsf.netlify.app
